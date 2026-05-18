@@ -7,7 +7,7 @@ public record CreatePcRequest(
     [MaxLength(50)]
     string Name,
     [Required]
-    double Weight,
+    float Weight,
     [Required]
     int Warranty,
     [Required]

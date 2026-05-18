@@ -175,7 +175,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             {
                 Id = 1,
                 Name = "Gaming Beast X",
-                Weight = 12.5,
+                Weight = 12.5f,
                 Warranty = 36,
                 CreatedAt = new DateTime(2026, 5, 8, 9, 0, 0),
                 Stock = 5
@@ -184,7 +184,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             {
                 Id = 2,
                 Name = "Office Mini Pro",
-                Weight = 4.2,
+                Weight = 4.2f,
                 Warranty = 24,
                 CreatedAt = new DateTime(2026, 4, 15, 13, 30, 0),
                 Stock = 12
@@ -193,7 +193,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             {
                 Id = 3,
                 Name = "Creator Max",
-                Weight = 8.9,
+                Weight = 8.9f,
                 Warranty = 12,
                 CreatedAt = new DateTime(2026, 3, 1, 10, 0, 0),
                 Stock = 7
