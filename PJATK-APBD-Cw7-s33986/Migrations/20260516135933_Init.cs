@@ -19,8 +19,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Abbreviation = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     FoundationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -35,7 +35,7 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Abbreviation = table.Column<string>(type: "nvarchar(30)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +65,7 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 {
                     Code = table.Column<string>(type: "char(10)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(300)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     ComponentManufacturerId = table.Column<int>(type: "int", nullable: false),
                     ComponentTypeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -118,7 +118,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 {
                     { 1, "AMD", new DateTime(1969, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Advanced Micro Devices" },
                     { 2, "NV", new DateTime(1993, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "NVIDIA Corporation" },
-                    { 3, "COR", new DateTime(1994, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Corsair Gaming Inc." }
+                    { 3, "COR", new DateTime(1994, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Corsair Gaming Inc." },
+                    { 4, "SAM", new DateTime(1969, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Samsung Electronics" }
                 });
 
             migrationBuilder.InsertData(
@@ -128,7 +129,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 {
                     { 1, "CPU", "Processor" },
                     { 2, "GPU", "Graphics Card" },
-                    { 3, "RAM", "Memory" }
+                    { 3, "RAM", "Memory" },
+                    { 4, "SSD", "Storage" }
                 });
 
             migrationBuilder.InsertData(
@@ -137,7 +139,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 values: new object[,]
                 {
                     { 1, new DateTime(2026, 5, 8, 9, 0, 0, 0, DateTimeKind.Unspecified), "Gaming Beast X", 5, 36, 12.5 },
-                    { 2, new DateTime(2026, 4, 15, 13, 30, 0, 0, DateTimeKind.Unspecified), "Office Mini Pro", 12, 24, 4.2000000000000002 }
+                    { 2, new DateTime(2026, 4, 15, 13, 30, 0, 0, DateTimeKind.Unspecified), "Office Mini Pro", 12, 24, 4.2000000000000002 },
+                    { 3, new DateTime(2026, 3, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), "Creator Max", 7, 12, 8.9000000000000004 }
                 });
 
             migrationBuilder.InsertData(
@@ -147,7 +150,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 {
                     { "CPU0000001", 1, 1, "8-core gaming processor", "Ryzen 7 7800X3D" },
                     { "GPU0000001", 2, 2, "High-end gaming graphics card", "RTX 4080 Super" },
-                    { "RAM0000001", 3, 3, "DDR5 RAM module 16GB", "Corsair Vengeance DDR5 16GB" }
+                    { "RAM0000001", 3, 3, "DDR5 RAM module 16GB", "Corsair Vengeance DDR5 16GB" },
+                    { "SSD0000001", 4, 4, "NVMe SSD 1TB", "Samsung 990 PRO 1TB" }
                 });
 
             migrationBuilder.InsertData(
@@ -157,7 +161,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                 {
                     { "CPU0000001", 1, 1 },
                     { "GPU0000001", 1, 1 },
-                    { "RAM0000001", 1, 2 }
+                    { "RAM0000001", 1, 2 },
+                    { "SSD0000001", 3, 1 }
                 });
 
             migrationBuilder.CreateIndex(

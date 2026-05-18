@@ -3,13 +3,13 @@ using PJATK_APBD_Cw7_s33986.Models;
 
 namespace PJATK_APBD_Cw7_s33986.Infrastructure;
 
-public class DatabaseContext(DbContextOptions options) : DbContext(options)
+public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
-    public DbSet<PC> PCs { get; set; } = null!;
-    public DbSet<Component> Components { get; set; } = null!;
-    public DbSet<PCComponent> PCComponents { get; set; } = null!;
-    public DbSet<ComponentType> ComponentTypes { get; set; } = null!;
-    public DbSet<ComponentManufacturer> ComponentManufacturers { get; set; } = null!;
+    public DbSet<PC> PCs { get; set; }
+    public DbSet<Component> Components { get; set; } 
+    public DbSet<PCComponent> PCComponents { get; set; }
+    public DbSet<ComponentType> ComponentTypes { get; set; }
+    public DbSet<ComponentManufacturer> ComponentManufacturers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -40,6 +40,22 @@ public class DatabaseContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<ComponentType>()
             .Property(ct => ct.Abbreviation)
             .HasColumnType("nvarchar(30)");
+
+        modelBuilder.Entity<ComponentManufacturer>()
+            .Property(m => m.Abbreviation)
+            .HasMaxLength(30);
+
+        modelBuilder.Entity<ComponentManufacturer>()
+            .Property(m => m.FullName)
+            .HasMaxLength(200);
+
+        modelBuilder.Entity<ComponentType>()
+            .Property(ct => ct.Name)
+            .HasMaxLength(100);
+
+        modelBuilder.Entity<Component>()
+            .Property(c => c.Description)
+            .HasMaxLength(500);
 
         modelBuilder.Entity<Component>()
             .HasOne(c => c.ComponentManufacturer)
@@ -82,6 +98,13 @@ public class DatabaseContext(DbContextOptions options) : DbContext(options)
                 Abbreviation = "COR",
                 FullName = "Corsair Gaming Inc.",
                 FoundationDate = new DateTime(1994, 1, 1)
+            },
+            new ComponentManufacturer
+            {
+                Id = 4,
+                Abbreviation = "SAM",
+                FullName = "Samsung Electronics",
+                FoundationDate = new DateTime(1969, 1, 13)
             }
         );
 
@@ -103,6 +126,12 @@ public class DatabaseContext(DbContextOptions options) : DbContext(options)
                 Id = 3,
                 Abbreviation = "RAM",
                 Name = "Memory"
+            },
+            new ComponentType
+            {
+                Id = 4,
+                Abbreviation = "SSD",
+                Name = "Storage"
             }
         );
 
@@ -130,6 +159,14 @@ public class DatabaseContext(DbContextOptions options) : DbContext(options)
                 Description = "DDR5 RAM module 16GB",
                 ComponentManufacturerId = 3,
                 ComponentTypeId = 3
+            },
+            new Component
+            {
+                Code = "SSD0000001",
+                Name = "Samsung 990 PRO 1TB",
+                Description = "NVMe SSD 1TB",
+                ComponentManufacturerId = 4,
+                ComponentTypeId = 4
             }
         );
 
@@ -151,6 +188,15 @@ public class DatabaseContext(DbContextOptions options) : DbContext(options)
                 Warranty = 24,
                 CreatedAt = new DateTime(2026, 4, 15, 13, 30, 0),
                 Stock = 12
+            },
+            new PC
+            {
+                Id = 3,
+                Name = "Creator Max",
+                Weight = 8.9,
+                Warranty = 12,
+                CreatedAt = new DateTime(2026, 3, 1, 10, 0, 0),
+                Stock = 7
             }
         );
 
@@ -172,6 +218,12 @@ public class DatabaseContext(DbContextOptions options) : DbContext(options)
                 PCId = 1,
                 ComponentCode = "RAM0000001",
                 Amount = 2
+            },
+            new PCComponent
+            {
+                PCId = 3,
+                ComponentCode = "SSD0000001",
+                Amount = 1
             }
         );
     }

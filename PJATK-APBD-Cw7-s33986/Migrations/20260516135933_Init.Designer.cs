@@ -11,8 +11,8 @@ using PJATK_APBD_Cw7_s33986.Infrastructure;
 
 namespace PJATK_APBD_Cw7_s33986.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
-    [Migration("20260516115231_Init")]
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20260516135933_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -38,7 +38,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -76,6 +77,14 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                             ComponentTypeId = 3,
                             Description = "DDR5 RAM module 16GB",
                             Name = "Corsair Vengeance DDR5 16GB"
+                        },
+                        new
+                        {
+                            Code = "SSD0000001",
+                            ComponentManufacturerId = 4,
+                            ComponentTypeId = 4,
+                            Description = "NVMe SSD 1TB",
+                            Name = "Samsung 990 PRO 1TB"
                         });
                 });
 
@@ -89,14 +98,16 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
 
                     b.Property<string>("Abbreviation")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime>("FoundationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -123,6 +134,13 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                             Abbreviation = "COR",
                             FoundationDate = new DateTime(1994, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "Corsair Gaming Inc."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Abbreviation = "SAM",
+                            FoundationDate = new DateTime(1969, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Samsung Electronics"
                         });
                 });
 
@@ -140,7 +158,8 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -164,6 +183,12 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                             Id = 3,
                             Abbreviation = "RAM",
                             Name = "Memory"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Abbreviation = "SSD",
+                            Name = "Storage"
                         });
                 });
 
@@ -213,6 +238,15 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                             Stock = 12,
                             Warranty = 24,
                             Weight = 4.2000000000000002
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2026, 3, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Creator Max",
+                            Stock = 7,
+                            Warranty = 12,
+                            Weight = 8.9000000000000004
                         });
                 });
 
@@ -251,6 +285,12 @@ namespace PJATK_APBD_Cw7_s33986.Migrations
                             PCId = 1,
                             ComponentCode = "RAM0000001",
                             Amount = 2
+                        },
+                        new
+                        {
+                            PCId = 3,
+                            ComponentCode = "SSD0000001",
+                            Amount = 1
                         });
                 });
 
